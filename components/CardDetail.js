@@ -1,26 +1,19 @@
 import React, { Component } from 'react'
 // 'Platform' is for different style and icon options for ios and android
-import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 
-
-export default class AllDecks extends Component {
+export default class CardDetail extends Component {
 
   render() {
 
     return (
       <View style={styles.container}>
 
-        <Text style={styles.bigText} onPress={() => this.props.navigation.navigate('Detail')}>Deck 1</Text>
-        <Text style={styles.smallText}>2 cards</Text>
+        <Text style={styles.bigText}>Card Detail Page</Text>
+        <Text style={styles.smallText}>Card Detail Page</Text>
 
 
-        <Text style={styles.bigText}>Deck 2</Text>
-        <Text style={styles.smallText}>5 cards</Text>
-
-
-        <Text style={styles.bigText}>Deck 3</Text>
-        <Text style={styles.smallText}>3 cards</Text>
 
 
       </View>
