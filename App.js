@@ -10,6 +10,8 @@ import reducer from './reducers'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import AllDecks from './components/AllDecks'
 import CardDetail from './components/CardDetail'
+import AddDeck from './components/AddDeck'
+
 
 
 const AppNavigator = createStackNavigator({
@@ -18,11 +20,15 @@ const AppNavigator = createStackNavigator({
   },
   Detail: {
     screen: CardDetail
+  },
+  AddDeck: {
+    screen: AddDeck
   }
 });
 
 
 const AppContainer = createAppContainer(AppNavigator);
+
 
 
 
