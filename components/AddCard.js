@@ -3,10 +3,11 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 
 
-export default class AddDeck extends Component {
+export default class AddCard extends Component {
 
   state = {
-    deck_title: ""
+    question_text: "",
+    answer_text: ""
   }
 
   render() {
@@ -14,13 +15,20 @@ export default class AddDeck extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.bigText}>Add Deck Page</Text>
+        <Text style={styles.bigText}>Add Card Page</Text>
 
         <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(deck_title) => this.setState({deck_title})}
-        value={this.state.deck_title}
-        placeholder="Deck Title"
+        onChangeText={(question_text) => this.setState({question_text})}
+        value={this.state.question_text}
+        placeholder="question"
+       />
+
+        <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(answer_text) => this.setState({answer_text})}
+        value={this.state.answer_text}
+        placeholder="answer"
        />
 
 
@@ -28,7 +36,7 @@ export default class AddDeck extends Component {
          onPress={"#"}
          title="Submit"
          color="#841584"
-         accessibilityLabel="Create Deck"
+         accessibilityLabel="Submit button"
        />
 
       </View>

@@ -27,8 +27,7 @@ export default class AllDecks extends Component {
         <Text style={styles.smallText}>5 cards</Text>
 
 
-        <Text style={styles.bigText}>Deck 4</Text>
-        <Text style={styles.smallText}>3 cards</Text>
+
 
         <View>
           <Text style={styles.smallText} onPress={() => this.props.navigation.navigate('Home')}>All Decks</Text>

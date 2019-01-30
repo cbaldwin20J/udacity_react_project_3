@@ -3,21 +3,14 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 
-export default class CardDetail extends Component {
+export default class DeleteDeck extends Component {
 
   render() {
 
     return (
       <View style={styles.container}>
 
-        <Text style={styles.bigText}>Card Detail Page</Text>
-        <Text style={styles.smallText}>Card Detail Page</Text>
-
-        <View>
-          <Text style={styles.smallText} onPress={() => this.props.navigation.navigate('AddCard')}>Add Card</Text>
-          <Text style={styles.smallText} onPress={() => this.props.navigation.navigate('StartQuiz')}>Start Quiz</Text>
-          <Text style={styles.smallText} onPress={() => this.props.navigation.navigate('DeleteDeck')}>Delete Deck</Text>
-        </View>
+        <Text style={styles.bigText}>Delete Deck Page</Text>
 
 
       </View>

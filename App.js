@@ -11,6 +11,13 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import AllDecks from './components/AllDecks'
 import CardDetail from './components/CardDetail'
 import AddDeck from './components/AddDeck'
+import AddCard from './components/AddCard'
+import StartQuiz from './components/StartQuiz'
+import DeleteDeck from './components/DeleteDeck'
+
+
+
+
 
 
 
@@ -23,6 +30,15 @@ const AppNavigator = createStackNavigator({
   },
   AddDeck: {
     screen: AddDeck
+  },
+  AddCard: {
+    screen: AddCard
+  },
+  StartQuiz: {
+    screen: StartQuiz
+  },
+  DeleteDeck: {
+    screen: DeleteDeck
   }
 });
 

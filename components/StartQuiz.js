@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 // 'Platform' is for different style and icon options for ios and android
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
+import { View, Text, StyleSheet, Button } from 'react-native'
 
 
-export default class AddDeck extends Component {
+export default class StartQuiz extends Component {
 
   state = {
-    deck_title: ""
+    questionsAndAnswers : {}
   }
 
   render() {
@@ -14,21 +14,21 @@ export default class AddDeck extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.bigText}>Add Deck Page</Text>
-
-        <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(deck_title) => this.setState({deck_title})}
-        value={this.state.deck_title}
-        placeholder="Deck Title"
-       />
+        <Text style={styles.bigText}>Question Page</Text>
 
 
        <Button
          onPress={"#"}
-         title="Submit"
+         title="Yes"
          color="#841584"
-         accessibilityLabel="Create Deck"
+         accessibilityLabel="Yes"
+       />
+
+       <Button
+         onPress={"#"}
+         title="No"
+         color="#841584"
+         accessibilityLabel="No"
        />
 
       </View>
