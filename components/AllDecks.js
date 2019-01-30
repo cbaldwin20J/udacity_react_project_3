@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // 'Platform' is for different style and icon options for ios and android
-import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, Platform, ScrollView } from 'react-native'
 
 
 
@@ -17,7 +17,7 @@ export default class AllDecks extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <ScrollView >
 
         <Text style={styles.bigText} onPress={() => this.props.navigation.navigate('Detail')}>Deck 1</Text>
         <Text style={styles.smallText}>2 cards</Text>
@@ -29,13 +29,13 @@ export default class AllDecks extends Component {
 
 
 
-        <View>
-          <Text style={styles.smallText} onPress={() => this.props.navigation.navigate('Home')}>All Decks</Text>
-          <Text style={styles.smallText} onPress={() => this.props.navigation.navigate('AddDeck')}>Add New Deck</Text>
+        <View style={styles.menuContainer}>
+          <Text style={styles.extraSmallText} onPress={() => this.props.navigation.navigate('Home')}>All Decks</Text>
+          <Text style={styles.extraSmallText} onPress={() => this.props.navigation.navigate('AddDeck')}>Add Deck</Text>
         </View>
 
 
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -47,6 +47,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  menuContainer: {
+    flex: 1,
+    backgroundColor: '#EDEDFC',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'row'
+  },
   bigText: {
     fontSize: 50,
     fontWeight: "bold",
@@ -57,4 +64,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 50,
   },
+  extraSmallText: {
+    color: '#C0C0C0',
+    fontSize: 12,
+    textAlign: 'center',
+    marginBottom: 50,
+  }
 })
