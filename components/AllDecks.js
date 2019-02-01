@@ -7,7 +7,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 export default class AllDecks extends Component {
 
   render() {
-
+    console.log("*****************************hello")
     return (
       <View style={styles.container}>
         <ScrollView style={{flex: 1 }}>
