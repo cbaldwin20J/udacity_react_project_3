@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
-// 'Platform' is for different style and icon options for ios and android
-import { View, TouchableOpacity, Text, StyleSheet, Platform, ScrollView } from 'react-native'
-
-
-
-
-
-
-
-
+import { View, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native'
+import Icon from "react-native-vector-icons/Ionicons";
 
 
 
@@ -17,25 +9,43 @@ export default class AllDecks extends Component {
   render() {
 
     return (
-      <ScrollView >
+      <View style={styles.container}>
+        <ScrollView style={{flex: 1 }}>
 
-        <Text style={styles.bigText} onPress={() => this.props.navigation.navigate('Detail')}>Deck 1</Text>
-        <Text style={styles.smallText}>2 cards</Text>
-
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
+          <Text style={styles.bigText} >Deck 1</Text>
+          <Text style={styles.smallText}>2 cards</Text>
+        </ TouchableOpacity>
 
         <Text style={styles.bigText}>Deck 2</Text>
         <Text style={styles.smallText}>5 cards</Text>
 
-
+      </ScrollView>
 
 
         <View style={styles.menuContainer}>
-          <Text style={styles.extraSmallText} onPress={() => this.props.navigation.navigate('Home')}>All Decks</Text>
-          <Text style={styles.extraSmallText} onPress={() => this.props.navigation.navigate('AddDeck')}>Add Deck</Text>
+
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Home')}>
+            <Text style={styles.extraSmallText}>All Decks</Text>
+            <Icon
+              name="ios-add"
+              color="#ccc"
+              size={25}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('AddDeck')}>
+            <Text style={styles.extraSmallText}>Add New Deck</Text>
+            <Icon
+              name="ios-albums"
+              color="#ccc"
+              size={25}
+            />
+          </TouchableOpacity>
+
         </View>
 
+      </View>
 
-      </ScrollView>
     )
   }
 }
@@ -45,29 +55,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   menuContainer: {
     flex: 1,
-    backgroundColor: '#EDEDFC',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0
   },
   bigText: {
-    fontSize: 50,
+    fontSize: 35,
     fontWeight: "bold",
+    marginTop: 50
   },
   smallText: {
     color: '#C0C0C0',
-    fontSize: 35,
-    textAlign: 'center',
-    marginBottom: 50,
+    fontSize: 20,
+    textAlign: 'center'
   },
   extraSmallText: {
     color: '#C0C0C0',
     fontSize: 12,
-    textAlign: 'center',
-    marginBottom: 50,
+    textAlign: 'center'
+  },
+  button: {
+    flex: 1,
+    backgroundColor: '#EDEDFC',
+    borderColor: '#D2D2DC',
+    borderWidth: 2,
+    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 4
   }
 })

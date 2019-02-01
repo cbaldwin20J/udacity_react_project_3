@@ -11,7 +11,7 @@ import middleware from './middleware'
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import AllDecks from './components/AllDecks'
-import CardDetail from './components/CardDetail'
+import DeckDetail from './components/DeckDetail'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
 import StartQuiz from './components/StartQuiz'
@@ -28,7 +28,7 @@ const AppNavigator = createStackNavigator({
     screen: AllDecks
   },
   Detail: {
-    screen: CardDetail
+    screen: DeckDetail
   },
   AddDeck: {
     screen: AddDeck
