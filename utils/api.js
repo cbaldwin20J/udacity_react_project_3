@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, StyleSheet, AsyncStorage } from 'react-native'
+import { addNewDeckFormat } from './formatters'
 
 
 
-
+export const DECKS_KEY = '@UdaciCards:Decks'
 
 //
 //***********************************************************8
@@ -11,31 +12,109 @@ import { View, StyleSheet, AsyncStorage } from 'react-native'
 
 // getDeck: take in a single id argument and return the deck associated with that id
 export function getDeck (id) {
-  return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
-    .then(formatCalendarResults)
+  AsyncStorage.getItem(DECKS_KEY)
+    .then((results) => {
+      const decks = JSON.parse(results)
+      return decks[id]
+
+    })
 }
+
+
 
 // addCardToDeck: take in two arguments, title and card, and will add the
 //       card to the list of questions for the deck with the associated title
+/*
 export function addCardToDeck ({ title, card }) {
-  return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({
-    [key]: entry
+  const the_deck = getDeck(title);
+  const updated_deck = the_deck.questions[...the_deck.questions, {card}]
+  const all_decks = getDecks()
+  const updated_decks_object = {...all_decks, updated_deck}
+  return AsyncStorage.setItem(DECKS_KEY, JSON.stringify({
+    updated_decks_object
   }))
 }
+*/
 
 // saveDeckTitle: take in a single title argument and add it to the decks
+
+export const initiate_empty_storage_object = () => {
+      try {
+
+      console.log("about to initiate empty storage object from api.js")
+      return AsyncStorage.setItem(DECKS_KEY, "{}")
+
+      } catch (error) {
+        console.log("There was an error initiating empty storage object: " + error.message)
+      }
+  };
+
+
 export function saveDeckTitle (title) {
-  return AsyncStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(dummyData))
+
+  try {
+    let new_deck_object = addNewDeckFormat(title)
+    console.log("this is the new deck object before saving to asyncstorage: " + JSON.stringify(new_deck_object))
+    return AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(new_deck_object))
+  } catch (error) {
+    console.log("error in saveDeckTitle: " + error)
+  }
 }
 
 
 // getDecks: return all of the decks along with their titles, questions, and answers
 export function getDecks () {
-  return AsyncStorage.getAllKeys.then((keys) => {
-    return AsyncStorage.multiGet(keys)
-      .then((result) => {
-        result.map(req => JSON.parse(req)).forEach(console.log);
-      });
-  });
+  try {
+  console.log("about to get decks from api.js")
+  return AsyncStorage.getItem(DECKS_KEY)
+
+  } catch (error) {
+    console.log("*******************there was an error in 'getDecks'  ")
+    return {}
+  }
 }
 
+
+
+//**************************************************************** from the practice erase
+export const save_deck_title = (title) => {
+
+    console.log("2) save_deck_title tile: " + title)
+      try {
+        let the_object = {question: [title]}
+        let string_object = JSON.stringify(the_object)
+        console.log('3) save_deck_title the_object before saving: ' + string_object)
+      return AsyncStorage.setItem('@MySuperStore:key', string_object)
+
+
+
+
+
+      } catch (error) {
+        console.log("There was an error saving title: " + error.message)
+        }
+  };
+
+
+
+
+
+
+
+export const retrievedTheData = () => {
+      try {
+        return AsyncStorage.getItem('@MySuperStore:key')
+
+      } catch (error) {
+          console.log("Error retreiving data: " + error.message)
+      }
+  };
+
+
+export const addDeck = (key, entry) => {
+
+
+  return AsyncStorage.mergeItem('@MySuperStore:key', JSON.stringify({
+    [key]: entry
+  }))
+}

@@ -1,27 +1,73 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, ScrollView, AsyncStorage } from 'react-native'
 import Icon from "react-native-vector-icons/Ionicons";
+
+import {DECKS_KEY, getDecks, initiate_empty_storage_object} from '../utils/api'
 
 
 
 export default class AllDecks extends Component {
 
+  state = {
+    all_decks: {}
+  }
+
+  componentDidMount(){
+    getDecks()
+      .then((decks) => {
+        decks_object = JSON.parse(decks)
+        console.log("1) componentDidMount 'decks': " + JSON.stringify(decks_object))
+        console.log("1) componentDidMount length of 'decks': " + Object.keys(decks_object).length)
+        if (Object.keys(decks_object).length > 0){
+          console.log("ran the if")
+          this.setState(() => {
+            return {
+              all_decks: decks_object
+            }
+          })
+        }else{
+          console.log("ran the else")
+          initiate_empty_storage_object()
+            .then(() => {
+
+              getDecks()
+                .then((decks) => {
+                    let decks_obj = JSON.parse(decks)
+                    console.log("Here is the current asyncstorage: " + JSON.stringify(decks_obj))
+                    console.log("Here is the current asyncstorage length: " + (Object.keys(decks_obj).length))
+
+                })
+            })
+        }
+      })
+  }
+
   render() {
-    console.log("*****************************hello")
+    console.log("2) *****************************: " + JSON.stringify(this.state.all_decks))
+    console.log("3) ********************* length of object: " + (Object.keys(this.state.all_decks).length))
     return (
       <View style={styles.container}>
-        <ScrollView style={{flex: 1 }}>
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
-          <Text style={styles.bigText} >Deck 1</Text>
-          <Text style={styles.smallText}>2 cards</Text>
-        </ TouchableOpacity>
+      <ScrollView style={{flex: 1 }}>
 
-        <Text style={styles.bigText}>Deck 2</Text>
-        <Text style={styles.smallText}>5 cards</Text>
+        {Object.keys(this.state.all_decks).length > 0 ?
 
-      </ScrollView>
+          Object.keys(this.state.all_decks).map((key) => (
+            <TouchableOpacity key={key} onPress={() => this.props.navigation.navigate('Detail')}>
+              <Text style={styles.bigText} >{key}</Text>
+              <Text style={styles.smallText}>{this.state.all_decks[key].questions.length}</Text>
+            </ TouchableOpacity>
+          ))
 
+
+
+
+
+      :
+      <Text style={styles.smallText}>No decks to be shown</Text>
+
+    }
+    </ScrollView>
 
         <View style={styles.menuContainer}>
 

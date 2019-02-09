@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, TextInput, AsyncStorage } from 'react-native'
 import Icon from "react-native-vector-icons/Ionicons";
+
+import {DECKS_KEY, saveDeckTitle, getDecks} from '../utils/api'
+
 
 
 
@@ -9,6 +12,23 @@ export default class AddDeck extends Component {
   state={
       deck_title: ""
     }
+
+  save_deck_title = () => {
+    console.log("***************this.state.deck_title: " + this.state.deck_title)
+    if(this.state){
+    saveDeckTitle(this.state.deck_title)
+    getDecks()
+      .then((decks) => {
+        console.log("***** the results of getDecks: " + JSON.stringify(decks))
+      })
+
+
+
+
+
+    }
+
+  }
 
   render() {
 
@@ -22,10 +42,10 @@ export default class AddDeck extends Component {
         style={{padding: 5, height: 40, borderColor: 'gray', borderWidth: 1, margin: 15, marginTop: 40}}
         onChangeText={(deck_title) => this.setState({deck_title})}
         value={this.state.deck_title}
-        placeholder="question"
+        placeholder="deck title"
        />
 
-       <TouchableOpacity style={[styles.button,{backgroundColor: '#000', borderColor: '#FFF', padding: 15, margin: 80}]} onPress={'#'}>
+       <TouchableOpacity style={[styles.button,{backgroundColor: '#000', borderColor: '#FFF', padding: 15, margin: 80}]} onPress={this.save_deck_title}>
          <Text style={[styles.smallText, {color: '#FFF'}]} >Create Deck</Text>
        </TouchableOpacity>
 
