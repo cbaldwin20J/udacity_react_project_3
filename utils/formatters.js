@@ -1,3 +1,9 @@
+import React from 'react'
+import { AsyncStorage } from 'react-native'
+
+import { getDecks } from '../utils/api'
+
+
 /*
 {
 	React: {
@@ -25,6 +31,16 @@
 }
 */
 
+function getSpecificDeck (deck_title) {
+	getDecks()
+	.then((decks) => {
+		let the_deck_object = JSON.parse(decks)
+		let the_deck = the_deck_object[deck_title]
+		console.log("2a) the_deck: " + the_deck)
+		return the_deck
+	})
+}
+
 export function addNewDeckFormat (deck_title) {
 
   	let deck_object = {
@@ -35,3 +51,5 @@ export function addNewDeckFormat (deck_title) {
   	}
   	return deck_object
 }
+
+

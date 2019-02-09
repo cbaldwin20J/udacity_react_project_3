@@ -50,10 +50,15 @@ export const initiate_empty_storage_object = () => {
   };
 
 
-export function saveDeckTitle (title) {
+export function saveDeckTitle (title, update=null) {
 
   try {
-    let new_deck_object = addNewDeckFormat(title)
+    if (!update){
+      let new_deck_object = addNewDeckFormat(title)
+    }else{
+      let new_deck_object = addCardToDeckFormat(title)
+    }
+
     console.log("this is the new deck object before saving to asyncstorage: " + JSON.stringify(new_deck_object))
     return AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(new_deck_object))
   } catch (error) {
@@ -67,6 +72,41 @@ export function getDecks () {
   try {
   console.log("about to get decks from api.js")
   return AsyncStorage.getItem(DECKS_KEY)
+
+  } catch (error) {
+    console.log("*******************there was an error in 'getDecks'  ")
+    return {}
+  }
+}
+
+export function add_card_to_deck (deck_title, question, answer) {
+  console.log("1a) deck_title: " + deck_title + " question: " + question + " answer: " + answer)
+  try {
+  getDecks()
+    .then((decks) => {
+      let the_deck_object = JSON.parse(decks)
+      let deck_to_update = the_deck_object[deck_title]
+      let questions_array = deck_to_update['questions']
+      questions_array.push({question: question, answer: answer})
+      console.log("2a) deck_to_update: " + JSON.stringify(deck_to_update))
+      console.log("3a) questions_array: " + JSON.stringify(questions_array))
+
+      let updatedDeck = {
+        [deck_title]: {
+          title: deck_title,
+          questions: questions_array
+        }
+      }
+
+      console.log("3a) updatedDeck: " + JSON.stringify(updatedDeck))
+      AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(updatedDeck))
+
+      })
+
+
+
+
+
 
   } catch (error) {
     console.log("*******************there was an error in 'getDecks'  ")

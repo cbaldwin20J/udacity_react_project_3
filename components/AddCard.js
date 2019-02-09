@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // 'Platform' is for different style and icon options for ios and android
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { DECKS_KEY, add_card_to_deck } from '../utils/api'
 
 
 export default class AddCard extends Component {
@@ -8,6 +9,10 @@ export default class AddCard extends Component {
   state = {
     question_text: "",
     answer_text: ""
+  }
+
+  save_card_to_deck = () => {
+    add_card_to_deck (this.props.navigation.state.params.deck_title, this.state.question_text, this.state.answer_text)
   }
 
   render() {
@@ -31,7 +36,7 @@ export default class AddCard extends Component {
        />
 
 
-        <TouchableOpacity style={[styles.button,{backgroundColor: '#000', borderColor: '#FFF'}]} onPress={'#'}>
+        <TouchableOpacity style={[styles.button,{backgroundColor: '#000', borderColor: '#FFF'}]} onPress={this.save_card_to_deck}>
           <Text style={[styles.smallText, {color: '#FFF', marginTop: 20, marginBottom: 20}]} >Submit</Text>
         </TouchableOpacity>
 

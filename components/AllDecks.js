@@ -53,7 +53,8 @@ export default class AllDecks extends Component {
         {Object.keys(this.state.all_decks).length > 0 ?
 
           Object.keys(this.state.all_decks).map((key) => (
-            <TouchableOpacity key={key} onPress={() => this.props.navigation.navigate('Detail')}>
+
+            <TouchableOpacity key={key} onPress={() => this.props.navigation.navigate('Detail', {title: key, card_total: this.state.all_decks[key].questions.length },)}>
               <Text style={styles.bigText} >{key}</Text>
               <Text style={styles.smallText}>{this.state.all_decks[key].questions.length}</Text>
             </ TouchableOpacity>
