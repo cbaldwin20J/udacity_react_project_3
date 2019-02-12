@@ -52,13 +52,16 @@ export const initiate_empty_storage_object = () => {
 
 export function saveDeckTitle (title, update=null) {
 
+  let new_deck_object = ''
   try {
-    if (!update){
-      let new_deck_object = addNewDeckFormat(title)
+    if (update){
+      console.log("ran if...")
+      new_deck_object = addCardToDeckFormat(title)
     }else{
-      let new_deck_object = addCardToDeckFormat(title)
+      console.log("ran else...")
+      new_deck_object = addNewDeckFormat(title)
     }
-
+    console.log("this is the new_deck_object: " + new_deck_object)
     console.log("this is the new deck object before saving to asyncstorage: " + JSON.stringify(new_deck_object))
     return AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(new_deck_object))
   } catch (error) {

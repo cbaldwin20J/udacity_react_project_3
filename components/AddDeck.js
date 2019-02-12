@@ -16,11 +16,10 @@ export default class AddDeck extends Component {
   save_deck_title = () => {
     console.log("***************this.state.deck_title: " + this.state.deck_title)
     if(this.state){
-    saveDeckTitle(this.state.deck_title)
-    getDecks()
-      .then((decks) => {
-        console.log("***** the results of getDecks: " + JSON.stringify(decks))
-      })
+      saveDeckTitle(this.state.deck_title)
+        .then(() => {
+          this.props.navigation.push('Home')
+        })
 
 
 

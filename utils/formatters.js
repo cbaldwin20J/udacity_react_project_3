@@ -49,6 +49,7 @@ export function addNewDeckFormat (deck_title) {
   			questions: []
   		}
   	}
+  	console.log("deck_object being returned: " + JSON.stringify(deck_object))
   	return deck_object
 }
 
