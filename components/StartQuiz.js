@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 // 'Platform' is for different style and icon options for ios and android
 import { View, Text, StyleSheet, TouchableOpacity,  TextInput } from 'react-native'
 import { DECKS_KEY, getDeck } from '../utils/api'
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/notification'
 
 
 export default class DeckDetail extends Component {
@@ -94,6 +98,8 @@ which_card_are_we_on
       console.log("**************finished is  now true")
       finished = true
       next_card = 0
+      clearLocalNotification()
+        .then(setLocalNotification)
     }
 
     this.setState(() => {

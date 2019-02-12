@@ -17,6 +17,9 @@ import AddCard from './components/AddCard'
 import StartQuiz from './components/StartQuiz'
 import DeleteDeck from './components/DeleteDeck'
 
+import { setLocalNotification } from './utils/notification'
+
+
 
 
 
@@ -51,6 +54,12 @@ const AppContainer = createAppContainer(AppNavigator);
 
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    // this is for the notifications
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>
