@@ -55,14 +55,10 @@ export function saveDeckTitle (title, update=null) {
   let new_deck_object = ''
   try {
     if (update){
-      console.log("ran if...")
       new_deck_object = addCardToDeckFormat(title)
     }else{
-      console.log("ran else...")
       new_deck_object = addNewDeckFormat(title)
     }
-    console.log("this is the new_deck_object: " + new_deck_object)
-    console.log("this is the new deck object before saving to asyncstorage: " + JSON.stringify(new_deck_object))
     return AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(new_deck_object))
   } catch (error) {
     console.log("error in saveDeckTitle: " + error)
@@ -106,11 +102,6 @@ export function add_card_to_deck (deck_title, question, answer) {
 
       })
 
-
-
-
-
-
   } catch (error) {
     console.log("*******************there was an error in 'getDecks'  ")
     return {}
@@ -118,6 +109,20 @@ export function add_card_to_deck (deck_title, question, answer) {
 }
 
 
+
+
+export function delete_deck (title) {
+
+  return getDecks()
+            .then((decks) => {
+              decks_object = JSON.parse(decks)
+               delete decks_object[title]
+               decks_string = JSON.stringify(decks_object)
+               AsyncStorage.setItem(DECKS_KEY, decks_string)
+            })
+
+
+}
 
 //**************************************************************** from the practice erase
 export const save_deck_title = (title) => {
@@ -128,10 +133,6 @@ export const save_deck_title = (title) => {
         let string_object = JSON.stringify(the_object)
         console.log('3) save_deck_title the_object before saving: ' + string_object)
       return AsyncStorage.setItem('@MySuperStore:key', string_object)
-
-
-
-
 
       } catch (error) {
         console.log("There was an error saving title: " + error.message)
@@ -155,8 +156,6 @@ export const retrievedTheData = () => {
 
 
 export const addDeck = (key, entry) => {
-
-
   return AsyncStorage.mergeItem('@MySuperStore:key', JSON.stringify({
     [key]: entry
   }))

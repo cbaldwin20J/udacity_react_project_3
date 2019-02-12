@@ -17,14 +17,15 @@ export default class AllDecks extends Component {
       .then((decks) => {
         decks_object = JSON.parse(decks)
         console.log("1) componentDidMount 'decks': " + JSON.stringify(decks_object))
-        console.log("1) componentDidMount length of 'decks': " + Object.keys(decks_object).length)
-        if (Object.keys(decks_object).length > 0){
+
+        if (decks_object && (Object.keys(decks_object).length > 0)){
           console.log("ran the if")
           this.setState(() => {
             return {
               all_decks: decks_object
             }
           })
+
         }else{
           console.log("ran the else")
           initiate_empty_storage_object()

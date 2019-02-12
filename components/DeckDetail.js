@@ -2,8 +2,20 @@ import React, { Component } from 'react'
 // 'Platform' is for different style and icon options for ios and android
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
+import { DECKS_KEY, delete_deck } from '../utils/api'
+
+
 
 export default class DeckDetail extends Component {
+
+  deleteDeck = () => {
+    console.log("deleteDeck was triggered")
+    const title = this.props.navigation.state.params.title
+    delete_deck(title)
+      .then(() => {
+        this.props.navigation.push('Home')
+      })
+  }
 
   render() {
 
@@ -24,7 +36,7 @@ export default class DeckDetail extends Component {
             <Text style={[styles.smallText, {color: '#FFF', marginTop: 20, marginBottom: 20}]} >Start Quiz</Text>
           </TouchableOpacity>
 
-          <Text style={[styles.smallText, {color: '#FF0000', marginTop: 30}]} onPress={() => this.props.navigation.navigate('DeleteDeck')}>Delete Deck</Text>
+          <Text style={[styles.smallText, {color: '#FF0000', marginTop: 30}]} onPress={this.deleteDeck}>Delete Deck</Text>
 
         </View>
 
