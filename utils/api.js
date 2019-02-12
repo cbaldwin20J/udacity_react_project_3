@@ -12,7 +12,7 @@ export const DECKS_KEY = '@UdaciCards:Decks'
 
 // getDeck: take in a single id argument and return the deck associated with that id
 export function getDeck (id) {
-  AsyncStorage.getItem(DECKS_KEY)
+  return AsyncStorage.getItem(DECKS_KEY)
     .then((results) => {
       const decks = JSON.parse(results)
       return decks[id]

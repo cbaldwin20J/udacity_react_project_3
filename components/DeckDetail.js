@@ -32,7 +32,7 @@ export default class DeckDetail extends Component {
             <Text style={[styles.smallText, {color: '#000', marginTop: 20, marginBottom: 20}]} >Add Card</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.button,{backgroundColor: '#000', borderColor: '#FFF'}]} onPress={() => this.props.navigation.navigate('StartQuiz')}>
+          <TouchableOpacity style={[styles.button,{backgroundColor: '#000', borderColor: '#FFF'}]} onPress={() => this.props.navigation.push('StartQuiz',{isThereCards: this.props.navigation.state.params.card_total, title: this.props.navigation.state.params.title})}>
             <Text style={[styles.smallText, {color: '#FFF', marginTop: 20, marginBottom: 20}]} >Start Quiz</Text>
           </TouchableOpacity>
 
