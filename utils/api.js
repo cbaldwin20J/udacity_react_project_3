@@ -82,7 +82,7 @@ export function getDecks () {
 export function add_card_to_deck (deck_title, question, answer) {
   console.log("1a) deck_title: " + deck_title + " question: " + question + " answer: " + answer)
   try {
-  getDecks()
+  return getDecks()
     .then((decks) => {
       let the_deck_object = JSON.parse(decks)
       let deck_to_update = the_deck_object[deck_title]

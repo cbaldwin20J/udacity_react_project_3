@@ -12,7 +12,7 @@ export default class AllDecks extends Component {
     all_decks: {}
   }
 
-  componentDidMount(){
+  componentWillMount(){
     getDecks()
       .then((decks) => {
         decks_object = JSON.parse(decks)
@@ -41,6 +41,7 @@ export default class AllDecks extends Component {
         }
       })
   }
+
 
   render() {
     console.log("2) *****************************: " + JSON.stringify(this.state.all_decks))

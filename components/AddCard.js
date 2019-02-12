@@ -13,6 +13,11 @@ export default class AddCard extends Component {
 
   save_card_to_deck = () => {
     add_card_to_deck (this.props.navigation.state.params.deck_title, this.state.question_text, this.state.answer_text)
+      .then(() => {
+        this.props.navigation.push('Home')
+      })
+
+
   }
 
   render() {
