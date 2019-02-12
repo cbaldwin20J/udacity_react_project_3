@@ -18,7 +18,7 @@ export default class AddDeck extends Component {
     if(this.state){
       saveDeckTitle(this.state.deck_title)
         .then(() => {
-          this.props.navigation.push('Home')
+          this.props.navigation.push('Home', {title: this.state.deck_title, card_total: 0 })
         })
 
 

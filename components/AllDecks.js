@@ -13,6 +13,13 @@ export default class AllDecks extends Component {
   }
 
   componentWillMount(){
+    if (this.props.navigation.state.params){
+      if (this.props.navigation.state.params.title){
+        this.props.navigation.push('Detail', {title: this.props.navigation.state.params.title, card_total: this.props.navigation.state.params.card_total })
+
+      }
+    }
+
     getDecks()
       .then((decks) => {
         decks_object = JSON.parse(decks)
