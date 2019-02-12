@@ -1,3 +1,6 @@
+// this is for our notification to remind the user they haven't done
+// a quiz yet today
+
 import React from 'react'
 import { AsyncStorage } from 'react-native'
 import { Notifications, Permissions } from 'expo'
@@ -5,12 +8,11 @@ import { Notifications, Permissions } from 'expo'
 const NOTIFICATION_KEY = 'UdaciFitness:notifications'
 
 
-
-
 export function clearLocalNotification () {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
     .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
+
 
 function createNotification () {
   return {
@@ -27,6 +29,7 @@ function createNotification () {
     }
   }
 }
+
 
 export function setLocalNotification () {
   AsyncStorage.getItem(NOTIFICATION_KEY)

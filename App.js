@@ -1,13 +1,7 @@
+// this is our main file where the navigator and appContainer is
+
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
-
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-
-import reducer from './reducers'
-import middleware from './middleware'
-
-
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import AllDecks from './components/AllDecks'
@@ -15,15 +9,8 @@ import DeckDetail from './components/DeckDetail'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
 import StartQuiz from './components/StartQuiz'
-import DeleteDeck from './components/DeleteDeck'
 
 import { setLocalNotification } from './utils/notification'
-
-
-
-
-
-
 
 
 const AppNavigator = createStackNavigator({
@@ -41,16 +28,11 @@ const AppNavigator = createStackNavigator({
   },
   StartQuiz: {
     screen: StartQuiz
-  },
-  DeleteDeck: {
-    screen: DeleteDeck
   }
 });
 
 
 const AppContainer = createAppContainer(AppNavigator);
-
-
 
 
 export default class App extends React.Component {
@@ -62,15 +44,13 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Provider store={createStore(reducer, middleware)}>
 
+      <AppContainer />
 
-          <AppContainer />
-
-      </Provider>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
