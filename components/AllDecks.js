@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 0
+    bottom: 0,
+    backgroundColor: '#FFF'
   },
   bigText: {
     fontSize: 35,

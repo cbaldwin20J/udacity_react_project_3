@@ -13,7 +13,8 @@ export default class DeckDetail extends Component {
     which_side: "question",
     answer_text: "",
     questions_correct: 0,
-    finished: null
+    finished: null,
+    incorrect: 0
   }
 which_card_are_we_on
   componentWillMount(){
@@ -38,6 +39,21 @@ which_card_are_we_on
 
           })
     }
+  }
+
+
+  retake_quiz = () => {
+    this.setState(() => {
+      return {
+        which_card_are_we_on: 0,
+        which_side: "question",
+        answer_text: "",
+        questions_correct: 0,
+        finished: null,
+        incorrect: 0
+      }
+
+    })
   }
 
 
@@ -66,14 +82,17 @@ which_card_are_we_on
     real_answer = real_answer.toLowerCase()
     let questions_correct = this.state.questions_correct
     let next_card = this.state.which_card_are_we_on + 1
+    let isIncorrect = this.state.incorrect + 1
     if (user_answer == real_answer){
       questions_correct += 1
+      isIncorrect = this.state.incorrect
 
     }
+
     let finished = null
     if (next_card == this.state.card_count){
       console.log("**************finished is  now true")
-      finished = true,
+      finished = true
       next_card = 0
     }
 
@@ -83,8 +102,8 @@ which_card_are_we_on
           which_side: "question",
           answer_text: "",
           questions_correct: questions_correct,
-          finished: finished
-
+          finished: finished,
+          incorrect: isIncorrect
         }
     })
 
@@ -94,7 +113,20 @@ which_card_are_we_on
   render() {
     if(this.state.finished){
            return (
-            <Text style={styles.bigText}>You got {this.state.questions_correct}/{this.state.card_count} questions correct</Text>
+            <View style={styles.container}>
+
+            <Text style={[styles.bigText, {marginBottom: 30, marginTop: 20}]}>You got {this.state.questions_correct}/{this.state.card_count} questions correct</Text>
+
+            <TouchableOpacity style={[styles.button,{backgroundColor: '#7CFC00', marginBottom: 10}]} onPress={this.retake_quiz}>
+              <Text style={[styles.smallText, {color: '#FFF', marginTop: 20, marginBottom: 20}]}>Restart Quiz</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[styles.button,{backgroundColor: '#F577A9', marginBottom: 10}]} onPress={() => this.props.navigation.navigate('Detail', {title: this.props.navigation.state.params.title, card_total: this.state.card_count })
+}>
+              <Text style={[styles.smallText, {color: '#FFF', marginTop: 20, marginBottom: 20}]}>Back to Deck</Text>
+            </TouchableOpacity>
+
+            </View>
             )
     }else{
 
@@ -108,9 +140,11 @@ which_card_are_we_on
         <View>
         <View style={{alignItems: 'flex-start', alignSelf: 'flex-start', marginTop: 5, marginLeft: 5 }}>
           <Text style={styles.smallText}>{this.state.which_card_are_we_on + 1}/{this.state.card_count}</Text>
+          <Text style={[styles.smallText, {color: '#E11B21'}]}>incorrect: {this.state.incorrect}</Text>
+
         </View>
 
-        <Text style={styles.bigText}>{this.state.is_there_cards[this.state.which_card_are_we_on][this.state.which_side]}</Text>
+        <Text style={[styles.smallText, {marginBottom: 0, textAlign: 'left'}]}>{this.state.is_there_cards[this.state.which_card_are_we_on][this.state.which_side]}</Text>
         <TouchableOpacity  onPress={this.changeSide}>
           {this.state.which_side == "question" ?
             <Text style={[styles.smallText, {color: '#FF0000', marginTop: 15, marginBottom: 15}]}>answer</Text>
@@ -125,7 +159,7 @@ which_card_are_we_on
            style={{padding: 5, height: 40, borderColor: 'gray', borderWidth: 1, margin: 15, marginTop: 40}}
            onChangeText={(answer_text) => this.setState({answer_text})}
            value={this.state.answer_text}
-           placeholder="question"
+           placeholder="your answer"
           />
 
           <TouchableOpacity style={[styles.button,{backgroundColor: '#7CFC00', marginBottom: 10}]} onPress={this.submitAnswer}>
