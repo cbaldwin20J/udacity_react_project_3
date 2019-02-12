@@ -28,7 +28,7 @@ export default class DeckDetail extends Component {
 
         <View>
 
-          <TouchableOpacity style={[styles.button,{backgroundColor: '#FFF', borderColor: '#000', marginBottom: 20}]} onPress={() => this.props.navigation.navigate('AddCard', {deck_title: this.props.navigation.state.params.title },)}>
+          <TouchableOpacity style={[styles.button,{backgroundColor: '#FFF', borderColor: '#000', marginBottom: 20}]} onPress={() => this.props.navigation.navigate('AddCard', {deck_title: this.props.navigation.state.params.title, card_total: this.props.navigation.state.params.card_total },)}>
             <Text style={[styles.smallText, {color: '#000', marginTop: 20, marginBottom: 20}]} >Add Card</Text>
           </TouchableOpacity>
 

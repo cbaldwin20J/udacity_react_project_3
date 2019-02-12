@@ -14,7 +14,8 @@ export default class AddCard extends Component {
   save_card_to_deck = () => {
     add_card_to_deck (this.props.navigation.state.params.deck_title, this.state.question_text, this.state.answer_text)
       .then(() => {
-        this.props.navigation.push('Home')
+        const cardTotal = this.props.navigation.state.params.card_total + 1
+        this.props.navigation.push('Home', {title: this.props.navigation.state.params.deck_title, card_total: cardTotal })
       })
 
 
